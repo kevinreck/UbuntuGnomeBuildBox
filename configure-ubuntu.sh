@@ -84,7 +84,6 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 
 time sudo apt update
 
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core gcc g++ make git vim-gnome apt-transport-https ca-certificates curl gnupg-agent software-properties-common wget code docker-ce docker-ce-cli containerd.io
 
 #########################################
