@@ -73,7 +73,8 @@ ensureAzureNetwork
 time sudo apt-get -y update
 # kill the waagent and uninstall, otherwise, adding the desktop will do this and kill this script
 sudo pkill waagent
-time sudo apt-get -y remove walinuxagent curl wget
+time sudo apt-get -y remove walinuxagent
+time sudo apt-get -y install curl wget
 
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
