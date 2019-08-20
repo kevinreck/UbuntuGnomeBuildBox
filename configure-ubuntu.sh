@@ -76,10 +76,10 @@ sudo pkill waagent
 time sudo apt-get -y remove walinuxagent
 time sudo apt-get -y install curl
 
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+#wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+#sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 time sudo apt update
@@ -133,21 +133,30 @@ echo "gnome-terminal &" | sudo tee -a $HOMEDIR/.vnc/xstartup
 
 sudo -i -u $AZUREUSER $HOMEDIR/bin/startvnc
 
-#####################
+########################################
 # setup the Azure CLI
-#####################
+########################################
 time sudo npm install azure-cli -g
-time sudo update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
+#time sudo update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
 
-####################
+########################################
+# NVM Script
+########################################
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | sudo -i -u $AZUREUSER bash
+
+########################################
 # Setup Chrome
-####################
+########################################
 cd /tmp
 time wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 time sudo dpkg -i google-chrome-stable_current_amd64.deb
 time sudo apt-get -y --force-yes install -f
 time rm /tmp/google-chrome-stable_current_amd64.deb
 
+########################################
+# Add user to Docker Group
+########################################
+sudo usermod -aG docker $AZUREUSER
 
 date
-echo "completed ubuntu devbox install on pid $$"
+echo "completed ubuntu devbox install on pid $$ - you need to reconnect to get the new group"
