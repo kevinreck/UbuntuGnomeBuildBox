@@ -23,7 +23,7 @@
     },
     "vmSize": {
       "type": "string",
-      "defaultValue": "Standard_D4s_v3",
+      "defaultValue": "Standard_D8s_v3",
       "allowedValues": [
         "Standard_B1ms",
         "Standard_B1s",
