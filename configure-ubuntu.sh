@@ -74,17 +74,31 @@ time sudo apt-get -y update
 # kill the waagent and uninstall, otherwise, adding the desktop will do this and kill this script
 sudo pkill waagent
 time sudo apt-get -y remove walinuxagent
-#time sudo apt-get -y install curl
+time sudo apt-get -y install curl software-properties-common apt-transport-https wget
 
-#wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#########################################
+# Setup Custom Repositories (GCloud, Docker, VSCode)
+#########################################
+# Add the Cloud SDK distribution URI as a package source & Import the Google Cloud Platform public key
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
 
-#sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-#sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+# Add VS Code
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
+# Add Docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+
+#########################################
+# END Setup Custom Repositories
+#########################################
 
 time sudo apt update
 
-time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core gcc g++ make git vim-gnome apt-transport-https ca-certificates curl gnupg-agent software-properties-common wget code docker-ce docker-ce-cli containerd.io
+time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core gcc g++ make git vim-gnome ca-certificates curl gnupg-agent code docker-ce docker-ce-cli containerd.io google-cloud-sdk
 
 #########################################
 # Setup Azure User Account including VNC
@@ -157,6 +171,14 @@ time rm /tmp/google-chrome-stable_current_amd64.deb
 # Add user to Docker Group
 ########################################
 sudo usermod -aG docker $AZUREUSER
+
+########################################
+# First Run
+########################################
+echo "#!/bin/sh" | sudo tee $HOMEDIR/bin/firstRun.sh
+echo "" | sudo tee $HOMEDIR/bin/firstRun.sh
+echo "nvm install 9.9.0" | sudo tee $HOMEDIR/bin/firstRun.sh
+sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/bin/firstRun.sh
 
 date
 echo "completed ubuntu devbox install on pid $$ - you need to reconnect to get the new group"
