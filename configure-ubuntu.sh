@@ -195,7 +195,10 @@ sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/bin/firstRun.sh
 #echo "popd" | sudo tee -a $HOMEDIR/bin/firstRun.sh
 
 #echo "pip install virtualenv" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo "gcloud auth login" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "gcloud auth login" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+
+sudo systemctl start mysql
+sudo systemctl enable mysql
 
 
 
