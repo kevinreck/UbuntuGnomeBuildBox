@@ -98,7 +98,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 
 time sudo apt update
 
-time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core gcc g++ make git vim-gnome ca-certificates curl gnupg-agent code docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients
+time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core gcc g++ make git vim-gnome ca-certificates curl gnupg-agent code docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python3-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients mysql-server
 
 #########################################
 # Setup Azure User Account including VNC
@@ -175,20 +175,24 @@ sudo usermod -aG docker $AZUREUSER
 ########################################
 # First Run
 ########################################
-sudo -i -u $AZUREUSER touch $HOMEDIR/bin/firstRun.sh
+
+
+
+sudo -i -u $AZUREUSER wget -O $HOMEDIR/bin/firstRun.sh https://raw.githubusercontent.com/kevinreck/UbuntuGnomeBuildBox/master/firstRun.sh
 sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/bin/firstRun.sh
 
-echo "#!/bin/sh" | sudo tee $HOMEDIR/bin/firstRun.sh
-echo "" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo ". ~/.nvm/nvm.sh" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo "nvm install 9.9.0" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo "mkdir repos" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo "pushd repos" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo "git clone git@github.com:Nautic-ON/deploy-gcp.git" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo "git clone git@github.com:Nautic-ON/cv-backend-documentation.git" | sudo tee -a $HOMEDIR/bin/firstRun.sh
-echo "docker-compose -f cv-backend-documentation/scripts/local-docker-setup/docker-compose.yml pull" | sudo tee -a $HOMEDIR/bin/firstRun.sh
 
-echo "popd" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "#!/bin/sh" | sudo tee $HOMEDIR/bin/firstRun.sh
+#echo "" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo ". ~/.nvm/nvm.sh" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "nvm install 9.9.0" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "mkdir repos" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "pushd repos" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "git clone git@github.com:Nautic-ON/deploy-gcp.git" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "git clone git@github.com:Nautic-ON/cv-backend-documentation.git" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+#echo "docker-compose -f cv-backend-documentation/scripts/local-docker-setup/docker-compose.yml pull" | sudo tee -a $HOMEDIR/bin/firstRun.sh
+
+#echo "popd" | sudo tee -a $HOMEDIR/bin/firstRun.sh
 
 #echo "pip install virtualenv" | sudo tee -a $HOMEDIR/bin/firstRun.sh
 echo "gcloud auth login" | sudo tee -a $HOMEDIR/bin/firstRun.sh
