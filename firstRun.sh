@@ -79,11 +79,8 @@ pushd repos/deploy-gcp/
 ./1-deploy-init.sh dev
 ./2-update-repos.sh
 
-pushd deploying-from-here/gateway/implementation/python
+./a-create-initial-dbs.sh
 
-source venv/bin/activate ; python loader.py ; deactivate
-
-popd
 popd
 
 echo "Please run -- source ~./bashrc -- to load the enviornment variables"
