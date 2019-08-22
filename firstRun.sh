@@ -7,6 +7,24 @@ die () {
 
 [ "$#" -eq 1 ] || die "NPM_TOKEN Required required, $# provided"
 
+export NPM_TOKEN=$1
+
+# set python virtual env default 
+export VIRTUALENV_PYTHON=python3
+
+# Dev
+export CV_DB_HOST=127.0.0.1
+export CV_DB_USER=root
+export CV_DB_PASSWORD=coleslaw
+export CV_MONGO_MQTT_PASS=coleslaw
+export CV_MONGO_MQTT_PRIMARY_URL=127.0.0.1
+export CV_MONGO_MQTT_USER=mqtt
+export CV_MQTT_HOST=127.0.0.1
+export CV_MONGO_DEVICE_USER=device_user
+export CV_MONGO_DEVICE_PASS=coleslaw
+export CV_MONGO_DEVICE_DB=CV_Device
+
+# now write same settings to bashrc
 tee -a ~/.bashrc > /dev/null << EOT
 
 # set the NPM Token
@@ -28,6 +46,8 @@ export CV_MONGO_DEVICE_PASS=coleslaw
 export CV_MONGO_DEVICE_DB=CV_Device
 EOT
 
+# load new environment vars
+. ~/.bashrc
 
 # Installing NVM
 . ~/.nvm/nvm.sh
@@ -52,8 +72,11 @@ docker-compose -f ~/repos/cv-backend-documentation/scripts/local-docker-setup/do
 gcloud auth login
 
 # Setting up Mongo
-mongo -u root -p password admin < ~/mongodb.js 
+mongo -u root -p password admin < ~/bin/mongodb.js 
 
 # 
-~/repos/deploy-gcp/1-deploy-init.sh dev
-~/repos/deploy-gcp/2-update-repos.sh
+cd repos/deploy-gcp/
+./1-deploy-init.sh dev
+./2-update-repos.sh
+
+echo "Please run `source ~./bashrc` to load the enviornment variables"
