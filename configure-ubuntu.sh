@@ -84,8 +84,8 @@ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
 
 # Add VS Code
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+#wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+#sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 
 # Add Docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -98,7 +98,8 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 
 time sudo apt update
 
-time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core gcc g++ make git vim-gnome ca-certificates curl gnupg-agent code docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python3-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients mysql-server
+#time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core 
+time sudo apt-get -y gcc g++ make git ca-certificates curl gnupg-agent docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python3-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients libzmq3-dev
 
 #########################################
 # Setup Azure User Account including VNC
@@ -151,7 +152,6 @@ sudo -i -u $AZUREUSER $HOMEDIR/bin/startvnc
 # setup the Azure CLI
 ########################################
 time sudo npm install azure-cli -g
-#time sudo update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
 
 ########################################
 # NVM Script
@@ -161,11 +161,11 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | sudo 
 ########################################
 # Setup Chrome
 ########################################
-cd /tmp
-time wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-time sudo dpkg -i google-chrome-stable_current_amd64.deb
-time sudo apt-get -y --force-yes install -f
-time rm /tmp/google-chrome-stable_current_amd64.deb
+#cd /tmp
+#time wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#time sudo dpkg -i google-chrome-stable_current_amd64.deb
+#time sudo apt-get -y --force-yes install -f
+#time rm /tmp/google-chrome-stable_current_amd64.deb
 
 ########################################
 # Add user to Docker Group
@@ -176,10 +176,10 @@ sudo usermod -aG docker $AZUREUSER
 # First Run
 ########################################
 
-
-
 sudo -i -u $AZUREUSER wget -O $HOMEDIR/bin/firstRun.sh https://raw.githubusercontent.com/kevinreck/UbuntuGnomeBuildBox/master/firstRun.sh
 sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/bin/firstRun.sh
+
+sudo -i -u $AZUREUSER wget -O $HOMEDIR/bin/mongoShell.js https://raw.githubusercontent.com/kevinreck/UbuntuGnomeBuildBox/master/mongoShell.js
 
 
 #echo "#!/bin/sh" | sudo tee $HOMEDIR/bin/firstRun.sh
@@ -197,10 +197,8 @@ sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/bin/firstRun.sh
 #echo "pip install virtualenv" | sudo tee -a $HOMEDIR/bin/firstRun.sh
 #echo "gcloud auth login" | sudo tee -a $HOMEDIR/bin/firstRun.sh
 
-sudo systemctl start mysql
-sudo systemctl enable mysql
 
 
 
 date
-echo "completed ubuntu devbox install on pid $$ - you need to reconnect to get the new group"
+echo "completed ubuntu devbox install on pid $$ - you need to logout and login back in before running ./firstRun.sh"
