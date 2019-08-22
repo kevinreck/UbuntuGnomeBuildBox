@@ -99,7 +99,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 time sudo apt update
 
 #time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core 
-time sudo apt-get -y gcc g++ make git ca-certificates curl gnupg-agent docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python3-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients libzmq3-dev
+time sudo DEBIAN_FRONTEND=noninteractive apt-get -y gcc g++ make git ca-certificates curl gnupg-agent docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python3-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients libzmq3-dev
 
 #########################################
 # Setup Azure User Account including VNC
