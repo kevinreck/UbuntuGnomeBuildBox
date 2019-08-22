@@ -75,8 +75,15 @@ gcloud auth login
 mongo -u root -p password admin < ~/bin/mongodb.js 
 
 # 
-cd repos/deploy-gcp/
+pushd repos/deploy-gcp/
 ./1-deploy-init.sh dev
 ./2-update-repos.sh
 
-echo "Please run `source ~./bashrc` to load the enviornment variables"
+pushd deploying-from-here/gateway/implementation/python
+
+source venv/bin/activate ; python loader.py ; deactivate
+
+popd
+popd
+
+echo "Please run -- source ~./bashrc -- to load the enviornment variables"
