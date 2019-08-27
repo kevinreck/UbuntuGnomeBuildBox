@@ -55,11 +55,12 @@ nvm install 9.9.0
 
 # Install PM2 - node processing
 npm install pm2@latest -g
+npm install mocha@latest -g 
 
 mkdir repos
 pushd repos
 
-# Cloning initial repose
+# Cloning initial reposels
 git clone git@github.com:Nautic-ON/deploy-gcp.git
 git clone git@github.com:Nautic-ON/cv-backend-documentation.git
 
