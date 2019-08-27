@@ -85,8 +85,8 @@ pushd repos/deploy-gcp/
 popd
 
 # set up a bash prompt
-wget -O .bash_prompt https://gist.githubusercontent.com/kfcobrien/c75a918682c6c9b11d3aa6dedb5d3928/raw/1b1d64110d5809c01a15fed5aaa018c161f629b5/.bash_prompt
-wget -O .git-prompt https://gist.githubusercontent.com/kfcobrien/c75a918682c6c9b11d3aa6dedb5d3928/raw/1b1d64110d5809c01a15fed5aaa018c161f629b5/.git-prompt
+wget -O ~/.bash_prompt https://gist.githubusercontent.com/kfcobrien/c75a918682c6c9b11d3aa6dedb5d3928/raw/1b1d64110d5809c01a15fed5aaa018c161f629b5/.bash_prompt
+wget -O ~/.git-prompt https://gist.githubusercontent.com/kfcobrien/c75a918682c6c9b11d3aa6dedb5d3928/raw/1b1d64110d5809c01a15fed5aaa018c161f629b5/.git-prompt
 
 
 echo "Please run -- source ~./bashrc -- to load the enviornment variables"
