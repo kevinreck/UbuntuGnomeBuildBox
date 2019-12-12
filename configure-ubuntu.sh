@@ -99,7 +99,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 time sudo apt update
 
 #time sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install ubuntu-desktop firefox vnc4server ntp nodejs expect gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal gnome-core 
-time sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gcc g++ make expect git ca-certificates curl gnupg-agent docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python-dev python3-dev python3-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients libzmq3-dev
+time sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gcc g++ make expect git ca-certificates curl gnupg-agent docker-ce docker-ce-cli containerd.io docker-compose google-cloud-sdk kubectl python-dev python3-dev python3-pip virtualenv libmysqlclient-dev mysql-client mongodb-clients libzmq3-dev libssl-dev
 
 #########################################
 # Setup Azure User Account including VNC
@@ -179,7 +179,7 @@ sudo usermod -aG docker $AZUREUSER
 sudo -i -u $AZUREUSER wget -O $HOMEDIR/bin/firstRun.sh https://raw.githubusercontent.com/kevinreck/UbuntuGnomeBuildBox/master/firstRun.sh
 sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/bin/firstRun.sh
 
-sudo -i -u $AZUREUSER wget -O $HOMEDIR/bin/mongoShell.js https://raw.githubusercontent.com/kevinreck/UbuntuGnomeBuildBox/master/mongoShell.js
+sudo -i -u $AZUREUSER wget -O $HOMEDIR/bin/mongodb.js https://raw.githubusercontent.com/kevinreck/UbuntuGnomeBuildBox/master/mongoShell.js
 
 
 #echo "#!/bin/sh" | sudo tee $HOMEDIR/bin/firstRun.sh
